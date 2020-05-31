@@ -609,6 +609,7 @@ public class AutowiredAnnotationBeanPostProcessor extends InstantiationAwareBean
 
 			if (value != null) {
 				ReflectionUtils.makeAccessible(field);
+				//fixme: wh 拿到需要注入的属性值在这里填充到bean中
 				field.set(bean, value);
 			}
 		}

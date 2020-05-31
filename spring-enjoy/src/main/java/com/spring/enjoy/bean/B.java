@@ -11,7 +11,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class B {
 //	@Autowired
-	public B(C c){
-		System.out.println("+++++B default");
+	public B(){
+		System.out.println("+++++init B");
 	}
+
+//	@Autowired
+//	A a;
 }

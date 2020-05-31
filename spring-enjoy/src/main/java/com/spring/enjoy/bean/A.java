@@ -17,15 +17,18 @@ public class A {
 //		System.out.println("service");
 //	}
 
+
 	@Autowired
-	public A(AopService service,B b){
-		System.out.println("++++service and b");
+	AopService aopService;
+
+	public A(){
+		System.out.println("++++init A");
 	}
 
 //	@Autowired(required = false)
-	public A(B b){
-		System.out.println("+++++instant B");
-	}
+//	public A(B b){
+//		System.out.println("+++++instant B");
+//	}
 	private String name;
 
 	public String getName() {
@@ -34,5 +37,9 @@ public class A {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public void testAop(){
+		aopService.test1();
 	}
 }

@@ -190,6 +190,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 				//如果还拿不到，并且允许bean提前暴露
 				if (singletonObject == null && allowEarlyReference) {
 					//从三级缓存中拿到对象工厂
+					//fixme: wh:singletonFactories 保存的的是一个beanFactory Map,这个beanFactory是在createBean时添加的
 					ObjectFactory<?> singletonFactory = this.singletonFactories.get(beanName);
 					if (singletonFactory != null) {
 						//从工厂中拿到对象

@@ -232,7 +232,8 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 		System.out.println("====beanName=="+beanName+"===instance begin====");
 		Object bean;
 
-			//从缓存中拿实例
+		//fixme: wh:第一次进来，明明知道不存在，为什么还要从中取一遍：
+		// 原因很简单：循环依赖，要从earlySingletonObjects缓存中拿到实例
 		// Eagerly check singleton cache for manually registered singletons.
 		Object sharedInstance = getSingleton(beanName);
 		//如果缓存里面能拿到实例

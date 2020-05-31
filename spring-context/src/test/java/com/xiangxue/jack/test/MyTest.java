@@ -9,7 +9,7 @@ public class MyTest {
 	@Test
 	public void test1() {
 		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
-		Student student = (Student)applicationContext.getBean("student");
-		System.out.println(student.getUsername());
+//		Student student = (Student)applicationContext.getBean("student");
+//		System.out.println(student.getUsername());
 	}
 }

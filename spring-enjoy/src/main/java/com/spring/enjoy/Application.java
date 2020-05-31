@@ -27,5 +27,8 @@ public class Application {
 //		aopService.adviceAddFunc();
 //		AopService aopService = (AopService) context.getBean("aopService");
 //		aopService.test5();
+
+//		A a = (A)context.getBean("a");
+//		a.testAop();
 	}
 }

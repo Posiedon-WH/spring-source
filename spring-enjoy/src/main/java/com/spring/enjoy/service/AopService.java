@@ -1,10 +1,14 @@
 package com.spring.enjoy.service;
 
+import com.spring.enjoy.bean.A;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AopService {
 
+	@Autowired
+	A a;
 	public void test1(){
 		System.out.println("====aopService.test1()====");
 	}

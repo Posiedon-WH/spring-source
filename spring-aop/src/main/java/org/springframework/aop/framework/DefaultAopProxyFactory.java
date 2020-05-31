@@ -46,6 +46,7 @@ import org.springframework.aop.SpringProxy;
 @SuppressWarnings("serial")
 public class DefaultAopProxyFactory implements AopProxyFactory, Serializable {
 
+	//fixme:  wh  创建AOPProxy代理对象，如果是接口会返回Jdk动态代理，否则返回CGlib代理
 	@Override
 	public AopProxy createAopProxy(AdvisedSupport config) throws AopConfigException {
 		if (config.isOptimize() || config.isProxyTargetClass() || hasNoUserSuppliedProxyInterfaces(config)) {
