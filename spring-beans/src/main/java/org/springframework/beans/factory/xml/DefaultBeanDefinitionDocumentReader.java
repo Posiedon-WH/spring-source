@@ -193,6 +193,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 		}
 	}
 
+	//fixme wh:spring 默认标签解析
 	private void parseDefaultElement(Element ele, BeanDefinitionParserDelegate delegate) {
 		//import标签解析  重要程度 1 ，可看可不看
 		if (delegate.nodeNameEquals(ele, IMPORT_ELEMENT)) {
