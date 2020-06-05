@@ -534,11 +534,11 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			prepareRefresh();
 
 			/**
-			   重要程度：5
-
-			 TODO ee
-			  1、创建BeanFactory对象
-			* 2、xml解析
+			**  重要程度：5
+            *
+			* TODO
+			*  1、创建BeanFactory对象
+			*  2、xml解析
 			* 	传统标签解析：bean、import等
 			* 	自定义标签解析 如：<context:component-scan base-package="com.xiangxue.jack"/>
 			* 	自定义标签解析流程：
@@ -560,7 +560,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			prepareBeanFactory(beanFactory);
 
 			try {
-				//TODO
+
 				/*
 				*TODO
 				* */

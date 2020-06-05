@@ -63,8 +63,8 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	 */
 	public AnnotationConfigApplicationContext() {
 		/**
-		 * wh:注解扫描器，类路径扫描器
-		 * 		推断其多用就是加载所有类信息
+		 * fixme: wh:注解扫描器，类路径扫描器
+		 * 	推断其多用就是加载所有类信息
 		 */
 		this.reader = new AnnotatedBeanDefinitionReader(this);
 		this.scanner = new ClassPathBeanDefinitionScanner(this);

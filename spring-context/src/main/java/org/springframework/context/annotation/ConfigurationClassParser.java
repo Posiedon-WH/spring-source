@@ -282,6 +282,8 @@ class ConfigurationClassParser {
 		if (!componentScans.isEmpty() &&
 				!this.conditionEvaluator.shouldSkip(sourceClass.getMetadata(), ConfigurationPhase.REGISTER_BEAN)) {
 			for (AnnotationAttributes componentScan : componentScans) {
+				//fixme: wh: @ComponentScan 扫描-》componentScanParser.parse()->org.springframework.context.annotation.ComponentScanAnnotationParser.parse()->
+				// org.springframework.context.annotation.ClassPathBeanDefinitionScanner.doScan()完成类信息扫描
 				// The config class is annotated with @ComponentScan -> perform the scan immediately
 				Set<BeanDefinitionHolder> scannedBeanDefinitions =
 						this.componentScanParser.parse(componentScan, sourceClass.getMetadata().getClassName());

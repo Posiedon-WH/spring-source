@@ -72,7 +72,9 @@ class ComponentScanAnnotationParser {
 		this.registry = registry;
 	}
 
-
+	//fixme: wh: 用注解方式启动AnnotationConfigApplicationContext，
+	// 对类的扫描（通过对@ComponentScan注解信息的com.xx.xx解读，扫描包下的类，
+	// 最终还是通过ClassPathBeanDefinitionScanner.doScan()进行）
 	public Set<BeanDefinitionHolder> parse(AnnotationAttributes componentScan, final String declaringClass) {
 		ClassPathBeanDefinitionScanner scanner = new ClassPathBeanDefinitionScanner(this.registry,
 				componentScan.getBoolean("useDefaultFilters"), this.environment, this.resourceLoader);
@@ -92,12 +94,13 @@ class ComponentScanAnnotationParser {
 		}
 
 		scanner.setResourcePattern(componentScan.getString("resourcePattern"));
-
+		//对includeFilters解析
 		for (AnnotationAttributes filter : componentScan.getAnnotationArray("includeFilters")) {
 			for (TypeFilter typeFilter : typeFiltersFor(filter)) {
 				scanner.addIncludeFilter(typeFilter);
 			}
 		}
+		//对excludeFilters解析
 		for (AnnotationAttributes filter : componentScan.getAnnotationArray("excludeFilters")) {
 			for (TypeFilter typeFilter : typeFiltersFor(filter)) {
 				scanner.addExcludeFilter(typeFilter);
@@ -110,6 +113,7 @@ class ComponentScanAnnotationParser {
 		}
 
 		Set<String> basePackages = new LinkedHashSet<>();
+		//获得需要扫描的包名，可以是多个
 		String[] basePackagesArray = componentScan.getStringArray("basePackages");
 		for (String pkg : basePackagesArray) {
 			String[] tokenized = StringUtils.tokenizeToStringArray(this.environment.resolvePlaceholders(pkg),
@@ -129,6 +133,7 @@ class ComponentScanAnnotationParser {
 				return declaringClass.equals(className);
 			}
 		});
+		//fixme:  wh:doScan()进行扫描类
 		return scanner.doScan(StringUtils.toStringArray(basePackages));
 	}
 

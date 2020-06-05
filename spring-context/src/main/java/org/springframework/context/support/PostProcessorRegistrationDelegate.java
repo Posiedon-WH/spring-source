@@ -88,6 +88,8 @@ final class PostProcessorRegistrationDelegate {
 			for (String ppName : postProcessorNames) {
 				//判断是否实现了排序接口 PriorityOrdered
 				if (beanFactory.isTypeMatch(ppName, PriorityOrdered.class)) {
+					//fixme: wh:beanFactory.getBean(ppName, BeanDefinitionRegistryPostProcessor.class)
+					// 初始化bean:org.springframework.context.annotation.internalConfigurationAnnotationProcessor
 					currentRegistryProcessors.add(beanFactory.getBean(ppName, BeanDefinitionRegistryPostProcessor.class));
 					processedBeans.add(ppName);
 				}

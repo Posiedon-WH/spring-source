@@ -443,6 +443,7 @@ public class ClassPathScanningCandidateComponentProvider implements EnvironmentC
 						//如果类上面有includeFilters注解
 						if (isCandidateComponent(metadataReader)) {
 							//fixme wh:最初beanDefinition生成---通过扫描包文件，读取到类元数据
+							// 最初beanDefinition中只有beanClass信息，还没有填充其他属性如lazy,propotryvalue....
 							ScannedGenericBeanDefinition sbd = new ScannedGenericBeanDefinition(metadataReader);
 							sbd.setResource(resource);
 							sbd.setSource(resource);
