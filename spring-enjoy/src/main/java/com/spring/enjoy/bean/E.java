@@ -1,9 +1,12 @@
 package com.spring.enjoy.bean;
 
+import org.springframework.stereotype.Component;
+
 /**
  * @Author: Posiedon.wh
  * @Date: 2020/6/5 23:04
  */
+@Component
 public class E {
 	private String name;
 

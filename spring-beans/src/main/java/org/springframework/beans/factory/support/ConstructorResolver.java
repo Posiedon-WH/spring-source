@@ -221,6 +221,7 @@ class ConstructorResolver {
 							}
 						}
 						//获取到参数的值，建议不要看，比较深，主流程弄懂后再去细细打磨
+						//fixme: wh createArgumentArray 获得构造参数的引用，内部也是通过getBean()实现
 						argsHolder = createArgumentArray(beanName, mbd, resolvedValues, bw, paramTypes, paramNames,
 								getUserDeclaredConstructor(candidate), autowiring, candidates.length == 1);
 					}

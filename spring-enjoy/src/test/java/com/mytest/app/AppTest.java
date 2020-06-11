@@ -12,8 +12,8 @@ public class AppTest {
 	@Test
 	public void springXml(){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-		D bean = context.getBean(D.class);
-		bean.replace(33);
-		bean.replace("hello");
+//		D bean = context.getBean(D.class);
+//		bean.replace(33);
+//		bean.replace("hello");
 	}
 }

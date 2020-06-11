@@ -477,6 +477,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		}
 		RootBeanDefinition mbdToUse = mbd;
 
+		//fixme:通过beandefinition拿到beanClass
 		// Make sure bean class is actually resolved at this point, and
 		// clone the bean definition in case of a dynamically resolved Class
 		// which cannot be stored in the shared merged bean definition.
@@ -488,6 +489,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 		// Prepare method overrides.
 		try {
+			//fixme: 如果重写方法有多个，会设置setOverloaded true,如果有1个则为false，
+			// 在后面实现时通过判断标记就可以轻松进行重新，
 			mbdToUse.prepareMethodOverrides();
 		}
 		catch (BeanDefinitionValidationException ex) {
@@ -505,6 +508,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			* 这里可以直接返回实例本身
 			*
 			* 这个代码不用看，实际开发过程中用不到，我会做为一个甜点分享
+			*  fixme: 好像类似于@bean标签
 			* */
 			// Give BeanPostProcessors a chance to return a proxy instead of the target bean instance.
 			Object bean = resolveBeforeInstantiation(beanName, mbdToUse);

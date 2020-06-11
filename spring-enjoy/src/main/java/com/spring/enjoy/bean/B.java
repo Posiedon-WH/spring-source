@@ -10,11 +10,15 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class B {
+	private E e;
 //	@Autowired
 	public B(){
 		System.out.println("+++++init B");
 	}
-
+	@Autowired
+	public B(E e){
+		this.e=e;
+	}
 //	@Autowired
 //	A a;
 }

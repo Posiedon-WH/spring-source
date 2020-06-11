@@ -136,7 +136,7 @@ public class DefaultNamespaceHandlerResolver implements NamespaceHandlerResolver
 				}
 				NamespaceHandler namespaceHandler = (NamespaceHandler) BeanUtils.instantiateClass(handlerClass);
 
-				//调用处理类的init方法，在init方法中完成标签元素解析类的注册
+				//fixme: wh:SPI init()调用调用处理类的init方法，在init方法中完成标签元素解析类的注册
 				namespaceHandler.init();
 				handlerMappings.put(namespaceUri, namespaceHandler);
 				return namespaceHandler;

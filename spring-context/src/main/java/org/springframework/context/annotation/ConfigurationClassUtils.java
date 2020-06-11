@@ -169,6 +169,7 @@ abstract class ConfigurationClassUtils {
 			return false;
 		}
 
+		//fixme wh:对@Component，@ComponentScan，@Import，@ImportResource判断是否含有这些注解
 		// Any of the typical annotations found?
 		for (String indicator : candidateIndicators) {
 			if (metadata.isAnnotated(indicator)) {

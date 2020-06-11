@@ -569,7 +569,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 
 				/*
-				* wh：
+				* wh： 使用注解配置的会在这个方法里完成beandefinitionMap的添加
 				*
 				* BeanDefinitionRegistryPostProcessor
 				* BeanFactoryPostProcessor
