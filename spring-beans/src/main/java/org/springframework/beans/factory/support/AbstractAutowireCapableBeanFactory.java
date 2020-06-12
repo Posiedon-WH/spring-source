@@ -477,7 +477,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		}
 		RootBeanDefinition mbdToUse = mbd;
 
-		//fixme:通过beandefinition拿到beanClass
+		//fixme: 通过beandefinition拿到beanClass
 		// Make sure bean class is actually resolved at this point, and
 		// clone the bean definition in case of a dynamically resolved Class
 		// which cannot be stored in the shared merged bean definition.
@@ -576,11 +576,11 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		synchronized (mbd.postProcessingLock) {
 			if (!mbd.postProcessed) {
 				try {
-					//CommonAnnotationBeanPostProcessor  支持了@PostConstruct，@PreDestroy,@Resource注解
-					//AutowiredAnnotationBeanPostProcessor 支持 @Autowired,@Value注解
-					//BeanPostProcessor接口的典型运用，这里要理解这个接口
-					//对类中注解的装配过程
-					//重要程度5，必须看
+					// fixme:	wh:CommonAnnotationBeanPostProcessor  支持了@PostConstruct，@PreDestroy,@Resource注解
+					// AutowiredAnnotationBeanPostProcessor 支持 @Autowired,@Value注解
+					// BeanPostProcessor接口的典型运用，这里要理解这个接口
+					// 对类中注解的装配过程
+					// 重要程度5，必须看
 					applyMergedBeanDefinitionPostProcessors(mbd, beanType, beanName);
 				}
 				catch (Throwable ex) {
@@ -1169,7 +1169,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			return obtainFromSupplier(instanceSupplier, beanName);
 		}
 
-		//如果有FactoryMethodName属性
+		//fixme:	wh:FactoryMethod调用 如果有FactoryMethodName属性
 		if (mbd.getFactoryMethodName() != null) {
 			return instantiateUsingFactoryMethod(beanName, mbd, args);
 		}
