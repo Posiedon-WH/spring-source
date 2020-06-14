@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class NotVeryUsefulAspect {
 
-	@Pointcut("execution(* com.spring.enjoy.service.AopService.*(..))")
+	@Pointcut("execution(* com.spring.enjoy.service.JdkProxyService.*(..))")
 	private void anyOldTransfer() {}
 
 	@Before("anyOldTransfer()")
