@@ -2,9 +2,7 @@ package com.spring.enjoy;
 
 import com.spring.enjoy.aop.UsageTracked;
 import com.spring.enjoy.app.AppConfig;
-import com.spring.enjoy.bean.A;
-import com.spring.enjoy.bean.D;
-import com.spring.enjoy.bean.E;
+import com.spring.enjoy.bean.*;
 import com.spring.enjoy.service.AopInterface;
 import com.spring.enjoy.service.AopService;
 import com.spring.enjoy.service.JdkProxyService;
@@ -38,8 +36,10 @@ public class Application {
 //		a.testAop();
 
 
-		AopInterface jdkProxyService = (AopInterface)context.getBean("jdkProxyService");
-//		JdkProxyService jdkProxyService = (JdkProxyService)context.getBean("AopInterface");
-		jdkProxyService.add();
+//		AopInterface jdkProxyService = (AopInterface)context.getBean("jdkProxyService");
+//		jdkProxyService.add();
+
+		F f = (F)context.getBean("f");
+		System.out.println(f.toString());
 	}
 }

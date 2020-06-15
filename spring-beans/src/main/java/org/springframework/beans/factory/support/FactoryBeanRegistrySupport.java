@@ -170,7 +170,7 @@ public abstract class FactoryBeanRegistrySupport extends DefaultSingletonBeanReg
 				}
 			}
 			else {
-				//调用getObject方法
+				//fixme wh:factoryBean调用getObject方法
 				object = factory.getObject();
 			}
 		}

@@ -301,6 +301,7 @@ class ConfigurationClassParser {
 			}
 		}
 
+		//fixme:	wh:解析@import注解
 		// Process any @Import annotations
 		processImports(configClass, sourceClass, getImports(sourceClass), true);
 

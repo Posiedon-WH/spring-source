@@ -138,10 +138,13 @@ class ConfigurationClassBeanDefinitionReader {
 			registerBeanDefinitionForImportedConfigurationClass(configClass);
 		}
 		for (BeanMethod beanMethod : configClass.getBeanMethods()) {
+			//fixme: wh:@bean 注解的bd添加到beandefinitionMap容器中
 			loadBeanDefinitionsForBeanMethod(beanMethod);
 		}
 
 		loadBeanDefinitionsFromImportedResources(configClass.getImportedResources());
+		//fixme:	wh:将包装好的import需要的类bd注册到beandefinitionMap容器中
+		// org.springframework.context.annotation.ConfigurationClass.importBeanDefinitionRegistrars
 		loadBeanDefinitionsFromRegistrars(configClass.getImportBeanDefinitionRegistrars());
 	}
 
