@@ -289,7 +289,7 @@ public class DataSourceTransactionManager extends AbstractPlatformTransactionMan
 				if (logger.isDebugEnabled()) {
 					logger.debug("Switching JDBC Connection [" + con + "] to manual commit");
 				}
-				//关闭连接的自动提交，其实这步就是开启了事务
+				//fixme wh关闭连接的自动提交，其实这步就是开启了事务
 				con.setAutoCommit(false);
 			}
 
@@ -307,7 +307,7 @@ public class DataSourceTransactionManager extends AbstractPlatformTransactionMan
 
 			// Bind the connection holder to the thread.
 			if (txObject.isNewConnectionHolder()) {
-				//如果是新创建的事务，则建立当前线程和数据库连接的关系
+				//fixme: wh:如果是新创建的事务，则建立当前线程和数据库连接的关系
 				TransactionSynchronizationManager.bindResource(obtainDataSource(), txObject.getConnectionHolder());
 			}
 		}

@@ -135,7 +135,7 @@ public abstract class TransactionSynchronizationManager {
 	 * @see ResourceTransactionManager#getResourceFactory()
 	 */
 	@Nullable
-	public static Object getResource(Object key) {
+	public static Object getResource(Object key) {//fixme:	key,actualKey类型就是DataSource
 		//看看数据源连接池有没有扩展，一般没有
 		Object actualKey = TransactionSynchronizationUtils.unwrapResourceIfNecessary(key);
 		Object value = doGetResource(actualKey);
@@ -151,6 +151,8 @@ public abstract class TransactionSynchronizationManager {
 	 */
 	@Nullable
 	private static Object doGetResource(Object actualKey) {
+		//fixme:	wh:resources就是一个ThreadLocal<Map<Object, Object>>:Map<datasource,ConnectionHolder>
+		// ConnectionHolder 对connection包装了一下
 		Map<Object, Object> map = resources.get();
 		if (map == null) {
 			return null;
@@ -184,6 +186,7 @@ public abstract class TransactionSynchronizationManager {
 			map = new HashMap<>();
 			resources.set(map);
 		}
+		//fixme:	wh:事务与threadlocal绑定
 		Object oldValue = map.put(actualKey, value);
 		// Transparently suppress a ResourceHolder that was marked as void...
 		if (oldValue instanceof ResourceHolder && ((ResourceHolder) oldValue).isVoid()) {

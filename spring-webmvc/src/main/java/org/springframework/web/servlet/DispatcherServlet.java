@@ -30,9 +30,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.stream.Collectors;
-import javax.servlet.DispatcherType;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -44,6 +42,7 @@ import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.i18n.LocaleContext;
 import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 import org.springframework.core.io.ClassPathResource;
@@ -369,6 +368,16 @@ public class DispatcherServlet extends FrameworkServlet {
 		setDispatchOptionsRequest(true);
 	}
 
+	@Override
+	public void onApplicationEvent(ContextRefreshedEvent event) {
+		super.onApplicationEvent(event);
+	}
+
+	@Override
+	public void refresh() {
+		super.refresh();
+	}
+
 	/**
 	 * Create a new {@code DispatcherServlet} with the given web application context. This
 	 * constructor is useful in Servlet 3.0+ environments where instance-based registration
@@ -413,6 +422,10 @@ public class DispatcherServlet extends FrameworkServlet {
 		setDispatchOptionsRequest(true);
 	}
 
+	@Override
+	public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+		super.service(req, res);
+	}
 
 	/**
 	 * Set whether to detect all HandlerMapping beans in this servlet's context. Otherwise,
@@ -499,6 +512,10 @@ public class DispatcherServlet extends FrameworkServlet {
 	 * <p>May be overridden in subclasses in order to initialize further strategy objects.
 	 */
 	protected void initStrategies(ApplicationContext context) {
+		//fixme:	wh:servlet容器收集HandlerMappings,HandlerAdapters,ViewResolvers.....
+		// 	->org.springframework.web.servlet.FrameworkServlet.onApplicationEvent()(监听spring初始化完成事件)
+		//	->org.springframework.web.servlet.DispatcherServlet.onRefresh()
+		//	->initStrategies()
 		initMultipartResolver(context);
 		initLocaleResolver(context);
 		initThemeResolver(context);
@@ -996,6 +1013,7 @@ public class DispatcherServlet extends FrameworkServlet {
 	 * @param response current HTTP response
 	 * @throws Exception in case of any kind of processing failure
 	 */
+	//fixme:	wh:servlet具体执行过程
 	protected void doDispatch(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpServletRequest processedRequest = request;
 		HandlerExecutionChain mappedHandler = null;
@@ -1014,6 +1032,19 @@ public class DispatcherServlet extends FrameworkServlet {
 				multipartRequestParsed = (processedRequest != request);
 
 				//这个方法很重要，重点看
+				// fixme:	wh:
+				//  handlerMethod类属性值有beanName,beanFactory,beanType,method,parameters等
+				//  RequestMappingInfo将@Controller类，@RequestMapping的注解信息保存，
+				//  MappingRegistration类将RequestMappingInfo，handlerMethod,uri,mappingName封装成对象
+				//  主要的映射关系(初始化时就已建立)：
+				//  a。建立RequestMappingInfo和handlerMethod的映射关系 this.mappingLookup.put(mapping, handlerMethod);，
+				//  b.建立url和RequestMappingInfo映射关系：this.urlLookup.add(url, mapping);
+				//  c.建立mappingInfo和MappingRegistration映射关系，this.registry.put(mapping, new MappingRegistration<>(mapping, handlerMethod, directUrls, name));
+				//  getHandler()->do somethings
+				//  1.从request对象中获取uri和HandlerMethod映射关系得到HandlerMethod，(uri和rmInfo->rmInfo,rmInfo和handlerMethod->handlerMethod)
+				//  2.将HandlerMethod（Controller类）通过beanDactory.getBean()实例化得到handler，
+				//  3.将Handler对象包装到HandlerExecutionChain对象中，这个对象中有过滤器对象,
+				//  4.mappedHandler:HandlerExecutionChain
 				// Determine handler for the current request.
 				mappedHandler = getHandler(processedRequest);
 				if (mappedHandler == null) {

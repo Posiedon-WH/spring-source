@@ -599,7 +599,7 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 				HandlerMethod handlerMethod = createHandlerMethod(handler, method);
 				//检验是否唯一
 				assertUniqueMethodMapping(handlerMethod, mapping);
-				//建立uri对象和handlerMethod的映射关系
+				//建立RequestMappingInfo和handlerMethod的映射关系
 				this.mappingLookup.put(mapping, handlerMethod);
 
 				List<String> directUrls = getDirectUrls(mapping);

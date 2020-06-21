@@ -476,7 +476,7 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 	 * @see #getAdaptedInterceptors()
 	 */
 	protected HandlerExecutionChain getHandlerExecutionChain(Object handler, HttpServletRequest request) {
-		//把HandlerMethod对象包装到HandlerExecutionChain对象中，这个对象中有过滤器对象
+		//fixme:	wh:把Handler对象包装到HandlerExecutionChain对象中，这个对象中有过滤器对象
 		HandlerExecutionChain chain = (handler instanceof HandlerExecutionChain ?
 				(HandlerExecutionChain) handler : new HandlerExecutionChain(handler));
 

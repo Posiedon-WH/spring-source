@@ -150,6 +150,7 @@ public class SpringServletContainerInitializer implements ServletContainerInitia
 				if (!waiClass.isInterface() && !Modifier.isAbstract(waiClass.getModifiers()) &&
 						WebApplicationInitializer.class.isAssignableFrom(waiClass)) {
 					try {
+						//fixme:	wh:循环实例化@HandlesTypes(WebApplicationInitializer.class) 类
 						initializers.add((WebApplicationInitializer)
 								ReflectionUtils.accessibleConstructor(waiClass).newInstance());
 					}
@@ -168,6 +169,8 @@ public class SpringServletContainerInitializer implements ServletContainerInitia
 		servletContext.log(initializers.size() + " Spring WebApplicationInitializers detected on classpath");
 		AnnotationAwareOrderComparator.sort(initializers);
 		for (WebApplicationInitializer initializer : initializers) {
+			//fixme:	wh:调用实现WebApplicationInitializer的onStartUp(),
+			// 完成dispatchServlet注册
 			initializer.onStartup(servletContext);
 		}
 	}
