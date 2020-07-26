@@ -10,6 +10,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Configuration
 @EnableAspectJAutoProxy
 @EnableTransactionManagement
-@EnableWebMvc
+//@EnableWebMvc
 public class AppConfig {
 }
