@@ -2,7 +2,6 @@ package com.spring.enjoy;
 
 import com.spring.enjoy.app.AppConfig;
 import com.spring.enjoy.bean.*;
-import com.spring.enjoy.factorybean.MyFactoryBean;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
@@ -37,7 +36,7 @@ public class Application {
 
 		F f = (F)context.getBean("f");
 		System.out.println(f.toString());
-		MyFactoryBean myFactoryBean = new MyFactoryBean();
+//		MyFactoryBean myFactoryBean = new MyFactoryBean();
 //		Object myBean = context.getBean("myBeanFactory");
 //		Object bean = context.getBean("&myBeanFactory");
 //		System.out.println(myBean);

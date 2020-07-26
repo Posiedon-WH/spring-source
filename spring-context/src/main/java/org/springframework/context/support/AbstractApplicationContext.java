@@ -569,10 +569,10 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 
 				/*
-				* wh： 使用注解配置的会在这个方法里完成beandefinitionMap的添加
+				* fixme wh： 使用注解配置的会在这个方法里完成beandefinitionMap的添加
 				*
-				* BeanDefinitionRegistryPostProcessor
-				* BeanFactoryPostProcessor
+				* fixme:b1.BeanDefinitionRegistryPostProcessor
+				* fixme:b2.BeanFactoryPostProcessor
 				* 完成对这两个接口的调用
 				* */
 				// Invoke factory processors registered as beans in the context.

@@ -26,6 +26,7 @@ public class MyBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegi
 //		ConstructorArgumentValues constructorArgumentValues = beanDefinition.getConstructorArgumentValues();
 //		constructorArgumentValues.addArgumentValues();
 		registry.registerBeanDefinition("wh",beanDefinition);
+
 	}
 
 	@Override

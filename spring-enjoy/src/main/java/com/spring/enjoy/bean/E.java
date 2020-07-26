@@ -1,5 +1,6 @@
 package com.spring.enjoy.bean;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class E {
 	private String name;
+
+	@Autowired
+	private C c;
 
 	public E() {
 	}

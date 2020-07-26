@@ -165,7 +165,7 @@ public abstract class BeanDefinitionReaderUtils {
 		String beanName = definitionHolder.getBeanName();
 
 		/**
-		 * wh:完成beanDefinition注册，重点看，重要程度 5
+		 * fixme: wh:完成beanDefinition注册，重点看，重要程度 5
 		 */
 		registry.registerBeanDefinition(beanName, definitionHolder.getBeanDefinition());
 

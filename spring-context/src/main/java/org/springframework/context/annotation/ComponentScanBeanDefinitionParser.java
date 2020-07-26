@@ -78,6 +78,7 @@ public class ComponentScanBeanDefinitionParser implements BeanDefinitionParser {
 
 
 	/*
+	* fixme: wh
 	* 1、扫描路径。.class后缀的文件
 	* 2、要判断类上是否有注解
 	* 3、GenericBeanDefinition genericBeanDefinition = new GenericBeanDefinition();

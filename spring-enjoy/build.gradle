@@ -8,7 +8,6 @@ repositories {
 }
 
 dependencies {
-
     compile(project(":spring-context"))
     compile(project(":spring-tx"))
     compile(project(":spring-web"))

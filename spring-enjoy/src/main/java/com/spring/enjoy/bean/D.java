@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
  * @Author: Posiedon.wh
  * @Date: 2020/6/2 0:49
  */
-//@Component
+@Component
 public class D {
 	private String name;
 	public D() {

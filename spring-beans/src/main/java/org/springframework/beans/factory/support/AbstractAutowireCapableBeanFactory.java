@@ -424,6 +424,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		* 这个对理解springboot有很大帮助。 这里暂时不需要深入看
 		* */
 		for (BeanPostProcessor processor : getBeanPostProcessors()) {
+			//bdwh 6.postProcessBeforeInitialization,
+			// @PostConstruct,某个Aware接口方法的调用,对ImportAware类型实例setImportMetadata调用
 			Object current = processor.postProcessBeforeInitialization(result, beanName);
 			if (current == null) {
 				return result;
@@ -439,6 +441,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 		Object result = existingBean;
 		for (BeanPostProcessor processor : getBeanPostProcessors()) {
+			//bdwh 3.BeanPostProcessor.postProcessAfterInitialization()
 			Object current = processor.postProcessAfterInitialization(result, beanName);
 			if (current == null) {
 				return result;
@@ -490,7 +493,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		// Prepare method overrides.
 		try {
 			//fixme: 如果重写方法有多个，会设置setOverloaded true,如果有1个则为false，
-			// 在后面实现时通过判断标记就可以轻松进行重新，
+			// 在后面实现时通过判断标记就可以轻松进行重写，
 			mbdToUse.prepareMethodOverrides();
 		}
 		catch (BeanDefinitionValidationException ex) {
@@ -501,6 +504,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		try {
 
 			/*
+			* todo 遗留TargetSource接口的运用
 			* TargetSource接口的运用，可以在用改一个类实现该接口，然后在里面定义实例化对象的方式，然后返回
 			* 也就是说不需要spring帮助我们实例化对象
 			*
@@ -508,7 +512,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			* 这里可以直接返回实例本身
 			*
 			* 这个代码不用看，实际开发过程中用不到，我会做为一个甜点分享
-			*  fixme: 好像类似于@bean标签
+			*
 			* */
 			// Give BeanPostProcessors a chance to return a proxy instead of the target bean instance.
 			Object bean = resolveBeforeInstantiation(beanName, mbdToUse);
@@ -1083,6 +1087,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		for (BeanPostProcessor bp : getBeanPostProcessors()) {
 			if (bp instanceof MergedBeanDefinitionPostProcessor) {
 				MergedBeanDefinitionPostProcessor bdp = (MergedBeanDefinitionPostProcessor) bp;
+				//bdwh 3.postProcessMergedBeanDefinition,
+				// @Autowired,@Value,@PostConstruct，@PreDestroy,@Resource支持
 				bdp.postProcessMergedBeanDefinition(mbd, beanType, beanName);
 			}
 		}
@@ -1391,6 +1397,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			for (BeanPostProcessor bp : getBeanPostProcessors()) {
 				if (bp instanceof InstantiationAwareBeanPostProcessor) {
 					InstantiationAwareBeanPostProcessor ibp = (InstantiationAwareBeanPostProcessor) bp;
+					//bdwh 5.postProcessAfterInstantiation
+					// 可以实现接口返回false,使所有类不能注入
 					if (!ibp.postProcessAfterInstantiation(bw.getWrappedInstance(), beanName)) {
 
 						//是否需要DI，依赖注入
@@ -1895,6 +1903,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 		String initMethodName = mbd.getInitMethodName();
 		Assert.state(initMethodName != null, "No init method set");
+		//fixme：反射调用initMethod
 		final Method initMethod = (mbd.isNonPublicAccessAllowed() ?
 				BeanUtils.findMethod(bean.getClass(), initMethodName) :
 				ClassUtils.getMethodIfAvailable(bean.getClass(), initMethodName));

@@ -62,12 +62,13 @@ final class PostProcessorRegistrationDelegate {
 			BeanDefinitionRegistry registry = (BeanDefinitionRegistry) beanFactory;
 			List<BeanFactoryPostProcessor> regularPostProcessors = new ArrayList<>();
 			List<BeanDefinitionRegistryPostProcessor> registryProcessors = new ArrayList<>();
-
+			//beanFactoryPostProcessors 第一次进来为0
 			for (BeanFactoryPostProcessor postProcessor : beanFactoryPostProcessors) {
 				if (postProcessor instanceof BeanDefinitionRegistryPostProcessor) {
 					BeanDefinitionRegistryPostProcessor registryProcessor =
 							(BeanDefinitionRegistryPostProcessor) postProcessor;
-					//fixme:	wh:BeanDefinitionRegistryPostProcessor调用
+
+
 					registryProcessor.postProcessBeanDefinitionRegistry(registry);
 					registryProcessors.add(registryProcessor);
 				}
@@ -103,6 +104,7 @@ final class PostProcessorRegistrationDelegate {
 			//fixme wh:question 调用了3次 ，117,136行又调用了一次
 			// 调用过程
 			invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry);
+			//清空
 			currentRegistryProcessors.clear();
 
 			// Next, invoke the BeanDefinitionRegistryPostProcessors that implement Ordered.
@@ -117,6 +119,7 @@ final class PostProcessorRegistrationDelegate {
 			}
 			sortPostProcessors(currentRegistryProcessors, beanFactory);
 			registryProcessors.addAll(currentRegistryProcessors);
+
 			invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry);
 			currentRegistryProcessors.clear();
 
@@ -135,12 +138,13 @@ final class PostProcessorRegistrationDelegate {
 				}
 				sortPostProcessors(currentRegistryProcessors, beanFactory);
 				registryProcessors.addAll(currentRegistryProcessors);
-				//
+				//bdwh 1:BeanDefinitionRegistryPostProcessor（自定义）调用
+				// 可以在这里添加修改删除beandefinition
 				invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry);
 				currentRegistryProcessors.clear();
 			}
 
-			//fixme wh：question:invokeBeanFactoryPostProcessors和invokeBeanDefinitionRegistryPostProcessors 区别
+			//fixme wh：question:invokeBeanFactoryPostProcessors和invokeBeanDefinitionRegistryPostProcessors
 			// 调用postProcessBeanFactory方法
 			// Now, invoke the postProcessBeanFactory callback of all processors handled so far.
 			invokeBeanFactoryPostProcessors(registryProcessors, beanFactory);
@@ -185,7 +189,6 @@ final class PostProcessorRegistrationDelegate {
 		// First, invoke the BeanFactoryPostProcessors that implement PriorityOrdered.
 		sortPostProcessors(priorityOrderedPostProcessors, beanFactory);
 
-		//fixme:	wh: beanFactoryPostProcessor 调用
 		invokeBeanFactoryPostProcessors(priorityOrderedPostProcessors, beanFactory);
 
 		// Next, invoke the BeanFactoryPostProcessors that implement Ordered.
@@ -201,6 +204,7 @@ final class PostProcessorRegistrationDelegate {
 		for (String postProcessorName : nonOrderedPostProcessorNames) {
 			nonOrderedPostProcessors.add(beanFactory.getBean(postProcessorName, BeanFactoryPostProcessor.class));
 		}
+		//bdwh 2.BeanFactoryPostProcessor 自定义调用
 		invokeBeanFactoryPostProcessors(nonOrderedPostProcessors, beanFactory);
 
 		// Clear cached merged bean definitions since the post-processors might have

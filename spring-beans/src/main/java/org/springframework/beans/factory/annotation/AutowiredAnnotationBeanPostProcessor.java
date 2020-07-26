@@ -428,7 +428,7 @@ public class AutowiredAnnotationBeanPostProcessor extends InstantiationAwareBean
 
 		do {
 			final List<InjectionMetadata.InjectedElement> currElements = new ArrayList<>();
-
+			//fixme wh:对属性值有@Autowired @Value收集
 			ReflectionUtils.doWithLocalFields(targetClass, field -> {
 				AnnotationAttributes ann = findAutowiredAnnotation(field);
 				if (ann != null) {
@@ -442,7 +442,7 @@ public class AutowiredAnnotationBeanPostProcessor extends InstantiationAwareBean
 					currElements.add(new AutowiredFieldElement(field, required));
 				}
 			});
-
+			//fixme wh:对方法有@Autowired @Value收集
 			ReflectionUtils.doWithLocalMethods(targetClass, method -> {
 				Method bridgedMethod = BridgeMethodResolver.findBridgedMethod(method);
 				if (!BridgeMethodResolver.isVisibilityBridgeMethodPair(method, bridgedMethod)) {

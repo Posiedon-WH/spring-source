@@ -513,10 +513,11 @@ public class BeanDefinitionParserDelegate {
 		}
 
 		try {
-			//创建GenericBeanDefinition对象
+			//fixme: wh:创建GenericBeanDefinition对象,只设置了beanName,beanClass(反射设置),parentName
 			AbstractBeanDefinition bd = createBeanDefinition(className, parent);
 
-			//解析bean标签的属性，并把解析出来的属性设置到BeanDefinition对象中
+			//fixme: 解析bean标签的属性，scope,abstract,lazy,autowired,depend-on,primary,init-method,destroy-method,factory-method,factory-bean，
+			// 并把解析出来的属性设置到BeanDefinition对象中
 			parseBeanDefinitionAttributes(ele, beanName, containingBean, bd);
 			bd.setDescription(DomUtils.getChildElementValueByTagName(ele, DESCRIPTION_ELEMENT));
 
